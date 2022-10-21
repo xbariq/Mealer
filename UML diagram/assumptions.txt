@@ -1,0 +1,2 @@
+Assumptions:
+- One cook/client can only have (register) a single account on the app
