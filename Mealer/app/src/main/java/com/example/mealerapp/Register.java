@@ -75,7 +75,13 @@ public class Register extends AppCompatActivity {
                     mPassword.setError(" Password must contain more than 8 characters ");
                     return;
 
+
                 }
+//                if (TextUtils.isEmpty(phone)) {
+//                    mPhone.setError(" Please enter an Phone ");
+//                    return;
+//                }
+
                 progressBar.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
