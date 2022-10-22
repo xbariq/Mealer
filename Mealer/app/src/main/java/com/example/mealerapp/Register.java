@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.*;
+// these import statements that are not used are for checking if the email is valid with more accuracy
+//We are still trying to figure out how we could implement this for the next deliverable
 
 
 
@@ -50,7 +52,7 @@ public class Register extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         if (theAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), User.class));
             finish();
 
 
@@ -90,7 +92,7 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(Register.this, "user created", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), User.class));
                         } else {
                             Toast.makeText(Register.this, " Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 

@@ -69,7 +69,7 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(Login.this, "You are logged in! ", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(),User.class));
                         }else {
                             Toast.makeText(Login.this, "Please verify your input! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
