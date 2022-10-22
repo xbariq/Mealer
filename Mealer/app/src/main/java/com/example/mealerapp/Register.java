@@ -4,7 +4,6 @@ package com.example.mealerapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,40 +15,41 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.*;
 
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class Register extends AppCompatActivity {
-    EditText mFullName,mEmail,mPassword,mPhone;
-    Button mRegisterBtn;
-    TextView mLoginBtn;
-    FirebaseAuth mAuth;
+    EditText theFullName,theEmail,thePassword,thePhone;
+    Button theRegisterBtn;
+    TextView theLoginBtn;
+    FirebaseAuth theAuth;
     ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        mFullName = findViewById(R.id.fullName);
-        mEmail = findViewById(R.id.Email);
-        mPassword = findViewById(R.id.password);
-        mPhone = findViewById(R.id.phone);
-        mRegisterBtn = findViewById(R.id.registerBtn);
-        mLoginBtn = findViewById(R.id.createText);
-        mAuth = FirebaseAuth.getInstance();
+        theFullName = findViewById(R.id.fullName);
+        theEmail = findViewById(R.id.Email);
+        thePassword = findViewById(R.id.password);
+        thePhone = findViewById(R.id.phone);
+        theRegisterBtn = findViewById(R.id.registerBtn);
+        theLoginBtn = findViewById(R.id.createText);
+        theAuth = FirebaseAuth.getInstance();
+
 
 
         progressBar = findViewById(R.id.progressBar);
 
-        if (mAuth.getCurrentUser() != null) {
+        if (theAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
 
@@ -57,22 +57,24 @@ public class Register extends AppCompatActivity {
         }
 
 
-        mRegisterBtn.setOnClickListener(new View.OnClickListener() {
+        theRegisterBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String email = mEmail.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
+                String email = theEmail.getText().toString().trim();
+                String password = thePassword.getText().toString().trim();
+                //Check if the user left the Email or password blank
+                if (TextUtils.isEmpty(password)) {
+                    thePassword.setError(" Please enter a password ");
+                    return;
+
+                }
 
                 if (TextUtils.isEmpty(email)) {
-                    mEmail.setError(" Please enter an Email ");
+                    theEmail.setError(" Please enter an Email ");
                     return;
                 }
-                if (TextUtils.isEmpty(password)) {
-                    mPassword.setError(" Please enter a password ");
-                    return;
-
-                }
+                //Password must be more than 8 characters
                 if (password.length() < 8) {
-                    mPassword.setError(" Password must contain more than 8 characters ");
+                    thePassword.setError(" Password must contain more than 8 characters ");
                     return;
 
 
@@ -83,7 +85,7 @@ public class Register extends AppCompatActivity {
 //                }
 
                 progressBar.setVisibility(View.VISIBLE);
-                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                theAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -99,4 +101,13 @@ public class Register extends AppCompatActivity {
                 });
             }
 
-        }); } }
+        });
+        theLoginBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(getApplicationContext(), Login.class));
+
+            }
+        });
+
+
+    } }
