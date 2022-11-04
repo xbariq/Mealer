@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
 
 
 public class Login extends AppCompatActivity {
@@ -23,6 +26,9 @@ public class Login extends AppCompatActivity {
     Button theLoginBtn;
     TextView theCreateBtn;
     FirebaseAuth theAuth;
+    private Account account;
+    private DatabaseReference databaseReference;
+
 
 
     @Override
@@ -36,13 +42,15 @@ public class Login extends AppCompatActivity {
         theCreateBtn= findViewById(R.id.createText);
         theAuth= FirebaseAuth.getInstance();
 
+
+
         theLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 String email = theEmail.getText().toString().trim();
                 String password = thePassword.getText().toString().trim();
-                //Check if the user left the Email or password blank
 
+                //Check if the user left the Email or password blank
 
                 if (TextUtils.isEmpty(password)){
                     thePassword.setError(" Please enter a password ");
@@ -62,13 +70,17 @@ public class Login extends AppCompatActivity {
 
                 }
 
-
-
                 theAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                            // See the UserRecord reference doc for the contents of userRecord.
+                            System.out.println("Successfully fetched user data: " + user.getUid());
                             Toast.makeText(Login.this, "You are logged in! ", Toast.LENGTH_SHORT).show();
+
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }else {
                             Toast.makeText(Login.this, "Please verify your input! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
