@@ -33,14 +33,14 @@ private static final String USERS= "users";
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds)
+                for (DataSnapshot ds;;);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        })
+        });
 
     }
         public void logout(View view){
