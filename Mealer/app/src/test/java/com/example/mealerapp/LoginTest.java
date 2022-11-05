@@ -12,13 +12,19 @@ import static org.junit.Assert.*;
 
 public class LoginTest {
     @Test
-    public void Login_IsFunctional(){
-        var log = new Login();
+    public void onClick_IsFunctional(){
+        var onclick = new onClick();
         String password = "";
         String email = "";
 
-        assertNull(Login(), log);
+        assertNull(onClick(), onclick);
 
+    @Test
+    public void onComplete_isFunctional(){
+        var oncomplete = new onComplete();
+
+        assertTrue (task.isSuccessful());
+        }
 
     }
 }
