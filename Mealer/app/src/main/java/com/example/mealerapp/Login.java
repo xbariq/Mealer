@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 
-
+//test
 public class Login extends AppCompatActivity {
     EditText theEmail,thePassword;
     Button theLoginBtn;
