@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class LoginTest {
     @Test
-    public void Login_isFunctional(){
+    public void Login_IsFunctional(){
         var log = new Login();
         String password = "";
         String email = "";
