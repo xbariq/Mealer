@@ -9,4 +9,5 @@ public class Constants {
     public static final String COOK_ROLE = "cook";
     public static final String ADMINISTRATOR_ROLE = "administrator";
     public static final String IS_ACTIVE_KEY= "active";
+    public static final String MENU_COLLECTION= "menu";
 }

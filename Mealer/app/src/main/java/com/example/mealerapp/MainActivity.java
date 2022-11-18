@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView role;
     private Account userData;
     FirebaseFirestore firestore;
-    Button btnSeeComplaints;
+    Button btnSeeComplaints, btnAddMeal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,16 @@ public class MainActivity extends AppCompatActivity {
 
         role = findViewById(R.id.role_textview);
         btnSeeComplaints = findViewById(R.id.btnSeeComplaints);
+        btnAddMeal= findViewById(R.id.btnAddMeal);
         getUserData();
 
         btnSeeComplaints.setOnClickListener(v -> {
             Intent intent = new Intent(this, ComplaintListActivity.class);
             startActivity(intent);
+        });
+        btnAddMeal.setOnClickListener(view -> {
+            Intent intent =new Intent(this, AddMealActivity.class );
+            startActivity (intent);
         });
 
     }
@@ -58,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
 
                                 if(userData.getRole().equals(Constants.ADMINISTRATOR_ROLE)){
                                     btnSeeComplaints.setVisibility(View.VISIBLE);
+                                }
+
+                                if (userData.getRole().equals (Constants.COOK_ROLE)){
+                                    btnAddMeal.setVisibility(View.VISIBLE);
+
                                 }
 
                                 if(!userData.isActive()) {
