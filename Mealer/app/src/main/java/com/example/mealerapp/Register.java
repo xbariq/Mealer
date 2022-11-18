@@ -21,29 +21,23 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.*;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 // these import statements that are not used are for checking if the email is valid with more accuracy
 //We are still trying to figure out how we could implement this for the next deliverable
 
 
-
 public class Register extends AppCompatActivity {
-    EditText theFullName,theEmail,thePassword,thePhone;
+    EditText theFullName, theEmail, thePassword, thePhone;
     Button theRegisterBtn;
     TextView theLoginBtn;
     FirebaseAuth theAuth;
     ProgressBar progressBar;
 
-    private FirebaseDatabase database;
-    private DatabaseReference aDatabase;
+    private FirebaseFirestore database;
+    private CollectionReference userCollection;
     private FirebaseAuth mAuth;
-    private static final String USER= "user";
-    private  static final String TAG= "RegisterActivity";
+    private static final String TAG = "RegisterActivity";
     private Account user;
 
     @Override
@@ -60,8 +54,8 @@ public class Register extends AppCompatActivity {
         RadioGroup rdg = (RadioGroup) findViewById(R.id.radioGroup);
 
 
-        database = FirebaseDatabase.getInstance();
-        aDatabase = database.getReference(USER);
+        database = FirebaseFirestore.getInstance();
+        userCollection = database.collection(Constants.USER_COLLECTION);
         mAuth = FirebaseAuth.getInstance();
 
         progressBar = findViewById(R.id.progressBar);
@@ -71,10 +65,10 @@ public class Register extends AppCompatActivity {
             finish();
         }
 
-        theLoginBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-            startActivity(new Intent(getApplicationContext(), Login.class));
-        }
+        theLoginBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Login.class));
+            }
         });
 
         theRegisterBtn.setOnClickListener(new View.OnClickListener() {
@@ -109,36 +103,49 @@ public class Register extends AppCompatActivity {
                         role = "cook";
                         break;
                 }
-                user = new Account(role, email, password);
+                user = new Account(role, email);
                 registerUser(email, password);
             }
         });
 
     }
-        public void registerUser(String email, String password){
-            progressBar.setVisibility(View.VISIBLE);
-            theAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user= mAuth.getCurrentUser();
-                        updateUI(user);
-                        Toast.makeText(Register.this, "user created", Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    } else {
-                        Toast.makeText(Register.this, " Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+    public void registerUser(String email, String password) {
+        progressBar.setVisibility(View.VISIBLE);
+        theAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                            Toast.makeText(Register.this, "user created", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        } else {
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(Register.this, " Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
 
-            });
-        }
+                });
+    }
 
-        public void updateUI(FirebaseUser currentUser){
-            String keyID= aDatabase.push().getKey();
-            aDatabase.child(keyID).setValue(user);
-            Intent loginIntent= new Intent (this, MainActivity.class);
-            startActivity(loginIntent);
-        }
+    public void updateUI(FirebaseUser currentUser) {
+        user.setUid(currentUser.getUid());
+        userCollection.document(user.getUid())
+                .set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Intent loginIntent = new Intent(Register.this, MainActivity.class);
+                            loginIntent.putExtra(Constants.USER_DATA, user);
+                            startActivity(loginIntent);
+                        } else {
+                            Toast.makeText(Register.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
 
 }

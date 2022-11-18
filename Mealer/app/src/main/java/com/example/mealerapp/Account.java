@@ -1,14 +1,28 @@
 package com.example.mealerapp;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
     private String role;
     private String username;
-    private String password;
+    private String uid;
 
-    public Account (String role, String username, String password){
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    private boolean isActive;
+
+    public Account(){}
+
+    public Account (String role, String username){
         this.role=role;
         this.username=username;
-        this.password= password;
+        this.isActive= true;
     }
 
     public String getRole() {
@@ -19,19 +33,19 @@ public class Account {
         return username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setRole(String role) {
         this.role = role;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }
