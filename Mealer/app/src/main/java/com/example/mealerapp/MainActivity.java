@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Account userData;
     FirebaseFirestore firestore;
     Button btnSeeComplaints, btnAddMeal;
+    //Firebase
 
 
     @Override
