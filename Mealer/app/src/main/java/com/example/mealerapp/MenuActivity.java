@@ -12,18 +12,21 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
     RecyclerView rv;
+    boolean showOffered;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         rv= findViewById(R.id.rvMenuLayout);
 
+        showOffered= getIntent().getBooleanExtra(Constants.OFFERED, false);
         getData();
     }
 
@@ -31,7 +34,11 @@ public class MenuActivity extends AppCompatActivity {
         FirebaseFirestore firebaseFirestore= FirebaseFirestore.getInstance();
         String userId= FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        firebaseFirestore.collection(Constants.MENU_COLLECTION).whereEqualTo("cookId", userId).get()
+        Query query = firebaseFirestore.collection(Constants.MENU_COLLECTION).whereEqualTo("cookId", userId);
+        if (showOffered){
+            query=query.whereEqualTo("offeredMeal",true);
+        }
+        query.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {

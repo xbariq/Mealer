@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".MealDetailActivity">
+
+    <TextView
+        android:id="@+id/mealName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+
+         />
+
+    <TextView
+        android:id="@+id/mealType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_marginTop="10dp"
+         />
+
+    <TextView
+        android:id="@+id/cuisineType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/mealDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_marginTop="10dp"
+         />
+
+
+
+    <TextView
+        android:id="@+id/cookName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_marginTop="10dp"
+         />
+
+    <TextView
+        android:id="@+id/cookRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_marginTop="10dp"
+         />
+
+    <Button
+        android:id="@+id/btnSelectMeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit Purchase Request"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        />
+
+</LinearLayout>

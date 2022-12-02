@@ -10,4 +10,6 @@ public class Constants {
     public static final String ADMINISTRATOR_ROLE = "administrator";
     public static final String IS_ACTIVE_KEY= "active";
     public static final String MENU_COLLECTION= "menu";
+    public static final String OFFERED= "offered";
+    public static final String MEAL_DATA= "meal_data";
 }

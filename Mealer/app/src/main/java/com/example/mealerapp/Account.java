@@ -7,6 +7,7 @@ public class Account implements Serializable {
     private String username;
     private String uid;
 
+
     public boolean isActive() {
         return isActive;
     }

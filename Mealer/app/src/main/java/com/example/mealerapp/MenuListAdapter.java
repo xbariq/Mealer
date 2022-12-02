@@ -53,6 +53,8 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.ViewHo
             TextView itemname= itemView.findViewById(R.id.itemname);
             TextView description= itemView.findViewById(R.id.description);
             ImageView delete= itemView.findViewById (R.id.deleteitem);
+            TextView mealtype= itemView.findViewById(R.id.mealtype);
+            TextView cuisinetype= itemView.findViewById(R.id.cusinetype);
 
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -72,6 +74,8 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.ViewHo
             });
             itemname.setText(menuItem.getMeal());
             description.setText(menuItem.getDescription());
+            mealtype.setText(menuItem.getMealType());
+            cuisinetype.setText(menuItem.getCuisineType());
         }
     }
 }
