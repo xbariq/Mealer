@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".AddMealActivity">
+
+
+    <EditText
+        android:id="@+id/addameal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="add meal"
+        android:inputType="textPersonName"
+        android:text=""
+        />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="add a description of the meal"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/mealType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="add meal type"
+        android:inputType="textPersonName"
+
+
+        />
+
+    <EditText
+        android:id="@+id/cuisineType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="add cuisine type"
+        android:inputType="textPersonName"
+
+
+        />
+
+    <CheckBox
+        android:id="@+id/addOffered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to Offered Menu"
+
+
+        />
+
+    <Button
+        android:id="@+id/btnadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="10dp"
+
+        android:text="add to menu" />
+
+    <Button
+        android:id="@+id/btnseemenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="See menu"
+
+
+        />
+
+    <Button
+        android:id="@+id/btnseeOffered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="See Offered Menu"
+
+        />
+
+</LinearLayout>
