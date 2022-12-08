@@ -45,5 +45,33 @@ public class UnitTestCases {
         boolean result4 = TESTOBJECT4.validateData();
         assertFalse(result4);
     }
+    
+        @Test
+    public void ValidatePasswordExistence() {
+        Register TESTOBJECT5 = new Register(mMockContext);
+        TESTOBJECT5.TextUtils.isEmpty(password) = True;
+        assertTrue(" Please enter a password ");
+    }
+
+    @Test
+    public void ValidateEmailExistence() {
+        Register TESTOBJECT6 = new Register(mMockContext);
+        TESTOBJECT6.TextUtils.isEmpty(email) = True;
+        assertTrue(" Please enter an Email ");
+    }
+
+    @Test
+    public void ValidateEmailExistence() {
+        Register TESTOBJECT7 = new Register(mMockContext);
+        TESTOBJECT7.password.length() = 7;
+        assertTrue(" Password must contain more than 8 characters ");
+    }
+
+    @Test
+    public void VerifyRegisterUserFunctionality() {
+        Register TESTOBJECT8 = new Register(mMockContext);
+        TESTOBJECT8.registerUser.onComplete(True);
+        assertTrue(updateUI(user));
+    }
 
 }
